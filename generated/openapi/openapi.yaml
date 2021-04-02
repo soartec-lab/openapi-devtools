@@ -1,0 +1,37 @@
+openapi: 3.0.0
+info:
+  description: internal_api
+  title: API
+  version: v1
+servers:
+- url: http://localhost:8082/
+paths:
+  /users:
+    get:
+      parameters:
+      - description: クエリパラメータ
+        in: query
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/id'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+          description: 成功
+components:
+  schemas:
+    id:
+      example: "1"
+      type: string
+    inline_response_200:
+      example:
+        user_id: "1234567"
+      properties:
+        user_id:
+          example: "1234567"
+          type: string
+      type: object
