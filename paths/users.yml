@@ -1,0 +1,28 @@
+get:
+  description: 
+  consumes:
+    - application/json
+  parameters:
+    - in: query
+      name: id
+      required: true
+      description: クエリパラメータ
+      schema:
+        $ref: '#/components/schemas/id'
+  responses:
+    '200':
+      description: "成功"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: string
+                example: 1234567
+
+components:
+  schemas:
+    id:
+      type: string
+      example: '1'

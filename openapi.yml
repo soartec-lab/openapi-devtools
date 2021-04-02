@@ -1,0 +1,14 @@
+openapi: 3.0.0
+info:
+  title: API
+  description: internal_api
+  version: v1
+
+servers:
+  # docker-composeでprismをホストしているポート番号に変更
+  - url: 'http://localhost:8082/'
+
+paths:
+  /users:
+    $ref: ./paths/users.yml
+
