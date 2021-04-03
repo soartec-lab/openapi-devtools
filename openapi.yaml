@@ -10,5 +10,5 @@ servers:
 
 paths:
   /users:
-    $ref: ./paths/users.yml
+    $ref: ./paths/users.yaml
 

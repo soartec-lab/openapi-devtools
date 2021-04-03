@@ -3,10 +3,10 @@ services:
   swagger-ui:
     image: swaggerapi/swagger-ui
     volumes:
-      - ./openapi.yml:/usr/share/nginx/html/openapi.yml
+      - ./openapi.yaml:/usr/share/nginx/html/openapi.yaml
       - ./paths:/usr/share/nginx/html/paths
     environment:
-      API_URL: openapi.yml
+      API_URL: openapi.yaml
     ports:
       - "8080:8080"
   swagger-editor:
@@ -17,9 +17,9 @@ services:
     image: stoplight/prism:3
     ports:
       - "8082:4010"
-    command: mock -h 0.0.0.0 /openapi.yml
+    command: mock -h 0.0.0.0 /openapi.yaml
     volumes:
-      - ./generated/openapi/openapi.yml:/openapi.yml
+      - ./generated/openapi/openapi.yaml:/openapi.yaml
   openapi-generator:
     image: openapitools/openapi-generator-cli
     volumes:

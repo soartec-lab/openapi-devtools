@@ -33,7 +33,7 @@ $ open http://localhost:8081
 Since prism cannot parse openapi `$ref`, use`openapi-generator` to combine the split YAML files into one schema.
 
 ```
-$ docker-compose run --rm openapi-generator generate -i workspace/openapi.yml -g openapi-yaml -o workspace/generated
+$ docker-compose run --rm openapi-generator generate -i workspace/openapi.yaml -g openapi-yaml -o workspace/generated
 ```
 
 `prism` is hosted on`localhost` port 8082 of `docker-compose`.
