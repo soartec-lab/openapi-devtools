@@ -8,6 +8,7 @@ servers:
 paths:
   /users:
     get:
+      description: user index
       parameters:
       - description: クエリパラメータ
         in: query
@@ -22,11 +23,66 @@ paths:
               schema:
                 $ref: '#/components/schemas/inline_response_200'
           description: 成功
+    post:
+      description: user create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_params'
+      responses:
+        "201":
+          description: created
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/not_found'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internal_server_error'
+          description: Internal Server Error
 components:
   schemas:
     id:
       example: "1"
       type: string
+    create_params:
+      properties:
+        name:
+          description: user name
+          example: john
+          type: string
+        status:
+          description: user status
+          enum:
+          - 0
+          - 1
+          example: 0
+          type: integer
+        user_posts:
+          description: user posts
+          items:
+            additionalProperties:
+              type: string
+            example:
+              date: 2021/04/04
+              amount: hello world
+            type: object
+          type: array
+    not_found:
+      properties:
+        message:
+          example: Not Found
+          type: string
+    internal_server_error:
+      properties:
+        message:
+          example: Internal Server Error
+          type: string
     inline_response_200:
       example:
         user_id: "1234567"

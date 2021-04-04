@@ -1,0 +1,10 @@
+not_found:
+  properties:
+    message:
+      type: string
+      example: Not Found
+internal_server_error:
+  properties:
+    message:
+      type: string
+      example: Internal Server Error

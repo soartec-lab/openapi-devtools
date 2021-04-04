@@ -1,0 +1,71 @@
+get:
+  description: user index
+  parameters:
+    - in: query
+      name: id
+      required: true
+      description: クエリパラメータ
+      schema:
+        $ref: '#/components/schemas/requests/index_params/id'
+  responses:
+    '200':
+      description: "成功"
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: string
+                example: 1234567
+
+post:
+  description: user create
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/requests/create_params'
+  responses:
+    '201':
+      description: "created"
+    '404':
+      description: "Not Found"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/not_found'
+    '500':
+      description: "Internal Server Error"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/internal_server_error'
+
+components:
+  schemas:
+    requests:
+      index_params:
+        id:
+          type: string
+          example: '1'
+      create_params:
+        properties:
+          name:
+            type: string
+            description: user name
+            example: john
+          status:
+            type: integer
+            description: user status
+            enum: [0, 1]
+            example: 0
+          user_posts:
+            type: array
+            description: user posts
+            items:
+              additionalProperties:
+                type: string
+              example:
+                date: 2021/04/04
+                amount: 'hello world'
