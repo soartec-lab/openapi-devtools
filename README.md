@@ -43,3 +43,35 @@ If you execute the above command and send a request to the mock server after the
 $ curl -X GET "http://localhost:8082/users?id=1" -H "accept: application/json"
 #=> {"user_id":"1234567"}
 ```
+
+## Directory structure
+
+```
+$ tree
+.
+├── LICENSE
+├── README.md
+├── docker-compose.yml
+├── generated
+│   ├── README.md
+│   └── openapi
+│       └── openapi.yaml
+├── openapi.yml
+└── resources
+    ├── components
+    │   └── schemas
+    │       └── errors.yml
+    └── paths
+        └── users.yml
+```
+
+### generated
+`openapi-generator` The output directory of the integrated YAML file.
+`prism` refers to `generated/openapi/openapi.yaml`.
+
+### openapi.yml
+If you want to add a new path, add the definition to this file.
+`swagger-ui` and `swagger-editor` refer to this file.
+
+### resources
+API resource definitions are stored in `paths`, and commonly used components are stored in `components`.
