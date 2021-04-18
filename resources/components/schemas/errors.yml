@@ -1,9 +1,15 @@
 not_found:
+  type: object
+  required:
+    - message
   properties:
     message:
       type: string
       example: Not Found
 internal_server_error:
+  type: object
+  required:
+    - message
   properties:
     message:
       type: string

@@ -14,6 +14,8 @@ get:
         application/json:
           schema:
             type: object
+            required:
+              - user_id
             properties:
               user_id:
                 type: string
@@ -50,6 +52,11 @@ components:
           type: string
           example: '1'
       create_params:
+        type: object
+        required:
+          - name
+          - status
+          - user_posts
         properties:
           name:
             type: string
