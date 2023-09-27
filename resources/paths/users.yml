@@ -24,25 +24,25 @@ get:
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/errors.yml#/unauthorized'
+            $ref: '../components/schemas/responses.yml#/unauthorized'
     '403':
       description: "Forbidden"
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/errors.yml#/forbidden'
+            $ref: '../components/schemas/responses.yml#/forbidden'
     '404':
       description: "Not Found"
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/errors.yml#/not_found'
+            $ref: '../components/schemas/responses.yml#/not_found'
     '500':
       description: "Internal Server Error"
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/errors.yml#/internal_server_error'
+            $ref: '../components/schemas/responses.yml#/internal_server_error'
 post:
   tags:
     - Users
@@ -60,43 +60,43 @@ post:
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/errors.yml#/created'
+            $ref: '../components/schemas/responses.yml#/created'
     '400':
       description: "Bad Request"
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/errors.yml#/bad_request'
+            $ref: '../components/schemas/responses.yml#/bad_request'
     '401':
       description: "Unauthorized"
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/errors.yml#/unauthorized'
+            $ref: '../components/schemas/responses.yml#/unauthorized'
     '403':
       description: "Forbidden"
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/errors.yml#/forbidden'
+            $ref: '../components/schemas/responses.yml#/forbidden'
     '404':
       description: "Not Found"
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/errors.yml#/not_found'
+            $ref: '../components/schemas/responses.yml#/not_found'
     '422':
       description: "Unprocessable Entity"
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/errors.yml#/unprocessable_entity_error'
+            $ref: '../components/schemas/responses.yml#/unprocessable_entity_error'
     '500':
       description: "Internal Server Error"
       content:
         application/json:
           schema:
-            $ref: '../components/schemas/errors.yml#/internal_server_error'
+            $ref: '../components/schemas/responses.yml#/internal_server_error'
 
 components:
   schemas:
