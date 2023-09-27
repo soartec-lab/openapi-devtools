@@ -8,4 +8,4 @@
 docker-compose run --rm openapi-generator generate \
   -i workspace/openapi.yml \
   -g openapi-yaml \
-  -o workspace/merged-schema
+  -o workspace/generated/merged-schema
