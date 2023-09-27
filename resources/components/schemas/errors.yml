@@ -1,3 +1,87 @@
+ok:
+  type: object
+  required:
+    - message
+  properties:
+    message:
+      $ref: '#/components/schemas/message'
+    errorDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/error_detail'
+
+created:
+  type: object
+  required:
+    - message
+  properties:
+    message:
+      $ref: '#/components/schemas/message'
+    errorDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/error_detail'
+
+accepted:
+  type: object
+  required:
+    - message
+  properties:
+    message:
+      $ref: '#/components/schemas/message'
+    errorDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/error_detail'  
+
+no_content:
+  type: object
+  required:
+    - message
+  properties:
+    message:
+      $ref: '#/components/schemas/message'
+    errorDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/error_detail'
+
+bad_request:
+  type: object
+  required:
+    - message
+  properties:
+    message:
+      $ref: '#/components/schemas/message'
+    errorDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/error_detail'
+
+unauthorized:
+  type: object
+  required:
+    - message
+  properties:
+    message:
+      $ref: '#/components/schemas/message'
+    errorDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/error_detail'
+
+forbidden:
+  type: object
+  required:
+    - message
+  properties:
+    message:
+      $ref: '#/components/schemas/message'
+    errorDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/error_detail'
+
 not_found:
   type: object
   required:
@@ -6,11 +90,47 @@ not_found:
     message:
       type: string
       example: Not Found
+    errorDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/error_detail'
+
+unprocessable_entity_error:
+  type: object
+  required:
+    - message
+  properties:
+    message:
+      $ref: '#/components/schemas/message'
+    errorDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/error_detail'
+
 internal_server_error:
   type: object
   required:
     - message
   properties:
     message:
+      $ref: '#/components/schemas/message'
+
+components:
+  schemas:
+    message:
       type: string
-      example: Internal Server Error
+      example: 登録しました。
+    error_detail:
+      type: object
+      required:
+        - propertyName
+        - propertyMessage
+      properties:
+        propertyName:
+          type: string
+          description: エラーになったプロパティ
+          example: name
+        propertyMessage:
+          type: string
+          description: エラーメッセージ
+          example: 入力値が不正です。

@@ -1,36 +1,36 @@
 get:
-  description: user index
+  tags:
+    - Users
+  summary: ユーザー一覧の取得
+  operationId: getUsers
   parameters:
     - in: query
-      name: id
-      required: true
-      description: クエリパラメータ
+      name: page
+      required: false
       schema:
-        $ref: '#/components/schemas/requests/index_params/id'
+        type: integer
+        minimum: 1
+        example: 10
+      description: ページャー
   responses:
     '200':
-      description: "成功"
+      description: "OK"
       content:
         application/json:
           schema:
-            type: object
-            required:
-              - user_id
-            properties:
-              user_id:
-                type: string
-                example: 1234567
-
-post:
-  description: user create
-  requestBody:
-    content:
-      application/json:
-        schema:
-          $ref: '#/components/schemas/requests/create_params'
-  responses:
-    '201':
-      description: "created"
+            $ref: '#/components/schemas/responses/users'
+    '401':
+      description: "Unauthorized"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/unauthorized'
+    '403':
+      description: "Forbidden"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/forbidden'
     '404':
       description: "Not Found"
       content:
@@ -43,36 +43,87 @@ post:
         application/json:
           schema:
             $ref: '../components/schemas/errors.yml#/internal_server_error'
+post:
+  tags:
+    - Users
+  summary: ユーザーの追加
+  operationId: Users
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/requests/users_create_params'
+  responses:
+    '201':
+      description: "Created"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/created'
+    '400':
+      description: "Bad Request"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/bad_request'
+    '401':
+      description: "Unauthorized"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/unauthorized'
+    '403':
+      description: "Forbidden"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/forbidden'
+    '404':
+      description: "Not Found"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/not_found'
+    '422':
+      description: "Unprocessable Entity"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/unprocessable_entity_error'
+    '500':
+      description: "Internal Server Error"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/internal_server_error'
 
 components:
   schemas:
-    requests:
-      index_params:
-        id:
-          type: string
-          example: '1'
-      create_params:
+    responses:
+      users:
         type: object
         required:
+          - users
+          - totalCount
+        properties:
+          users:
+            type: array
+            items:
+              $ref: '../components/schemas/user.yml#/user'
+          totalCount:
+            type: integer
+            description: リソースの合計数
+            example: 10
+            minimum: 0
+            maximum: 100
+
+    requests:
+      users_create_params:
+        required:
           - name
-          - status
-          - user_posts
         properties:
           name:
             type: string
-            description: user name
-            example: john
-          status:
-            type: integer
-            description: user status
-            enum: [0, 1]
-            example: 0
-          user_posts:
-            type: array
-            description: user posts
-            items:
-              additionalProperties:
-                type: string
-              example:
-                date: 2021/04/04
-                amount: 'hello world'
+            example: test
+            description: 名前

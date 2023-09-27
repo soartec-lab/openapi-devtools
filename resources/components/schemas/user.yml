@@ -1,0 +1,45 @@
+user:
+  type: object
+  required:
+    - uid
+    - email
+    - name
+    - age
+    - role
+    - isCompleted
+    - createdAt
+  properties:
+    uid:
+      type: string
+      description: uid
+      example: E4ByhpFY9J0gzXh6KTjdsA
+    email:
+      type: string
+      format: email
+      description: メールアドレス
+      example: test@test.com
+    name:
+      type: string
+      description: ユーザー名
+      example: test
+    age:
+      type: integer
+      description: 年齢
+      example: 20
+    role:
+      $ref: '#/user_role'
+    isCompleted:
+      type: boolean
+      description: ユーザー登録完了フラグ
+      example: true
+    createdAt:
+      type: string
+      format: date-time
+      description: 作成日時
+      example: "2001-02-03T04:05:06+09:00"
+
+user_role:
+  type: string
+  description: ユーザーのロール種別
+  enum: [ general, admin ]
+  example: general
