@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Ref: https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/dart-dio.md
+
+rm -rf dart-client
+
+docker-compose run --rm openapi-generator generate \
+  -i workspace/openapi.yml \
+  -g dart-dio \
+  -o workspace/dart-client \
+  --additional-properties=disallowAdditionalPropertiesIfNotPresent=false,pubName=dart-client,pubLibrary=dart-client
+
+# NOTE: 生成されたパッケージの依存パッケージのインストールと`build_runner`のビルドが必要です
+# 
+# cd dart-client
+# flutter pub get
+# flutter packages pub run build_runner build
+# cd ../
