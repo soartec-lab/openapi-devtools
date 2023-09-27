@@ -106,6 +106,152 @@ paths:
       summary: ユーザーの追加
       tags:
       - Users
+  /users/{uid}:
+    delete:
+      operationId: deleteUser
+      parameters:
+      - description: 対象のユーザーのuid
+        in: path
+        name: uid
+        required: true
+        schema:
+          example: 0fc59eb5-cd11-44ad-bf03-f6930d768f15
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ok'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/not_found'
+          description: NotFound
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internal_server_error'
+          description: Internal Server Error
+      summary: uidに紐づくユーザーを削除する
+      tags:
+      - User
+    get:
+      operationId: getUser
+      parameters:
+      - description: 対象ユーザーのuid
+        in: path
+        name: uid
+        required: true
+        schema:
+          example: 0fc59eb5-cd11-44ad-bf03-f6930d768f15
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/not_found'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internal_server_error'
+          description: Internal Server Error
+      summary: uidに紐づくユーザーを取得
+      tags:
+      - User
+    patch:
+      operationId: patchUser
+      parameters:
+      - description: 対象のユーザーのuid
+        in: path
+        name: uid
+        required: true
+        schema:
+          example: 0fc59eb5-cd11-44ad-bf03-f6930d768f15
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user_patch_params'
+        description: ユーザー更新のためのパラメータ
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ok'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/not_found'
+          description: Not Found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unprocessable_entity_error'
+          description: Unprocessable Entity Error
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internal_server_error'
+          description: Internal Server Error
+      summary: ユーザーの更新
+      tags:
+      - User
 components:
   schemas:
     users:
@@ -256,6 +402,16 @@ components:
       required:
       - message
       type: object
+    user_patch_params:
+      properties:
+        name:
+          description: ユーザー名
+          type: string
+        email:
+          description: メールアドレス
+          format: email
+          type: string
+      type: object
     user:
       example:
         uid: E4ByhpFY9J0gzXh6KTjdsA
@@ -310,3 +466,22 @@ components:
       - admin
       example: general
       type: string
+    ok:
+      example:
+        message: 登録しました。
+        errorDetails:
+        - propertyName: name
+          propertyMessage: 入力値が不正です。
+        - propertyName: name
+          propertyMessage: 入力値が不正です。
+      properties:
+        message:
+          example: 登録しました。
+          type: string
+        errorDetails:
+          items:
+            $ref: '#/components/schemas/error_detail'
+          type: array
+      required:
+      - message
+      type: object

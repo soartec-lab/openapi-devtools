@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 /**
  * API
  * internal_api
@@ -13,7 +11,13 @@
  */
 
 
+/**
+ * ユーザーのロール種別
+ */
+export type UserRole = 'general' | 'admin';
 
-export * from './gateways/user-api';
-export * from './gateways/users-api';
+export const UserRole = {
+    general: 'general' as UserRole,
+    admin: 'admin' as UserRole
+};
 

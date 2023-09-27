@@ -2,12 +2,12 @@
 
 # Ref: https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/dart-dio.md
 
-rm -rf dart-client
+rm -rf generated/dart-client
 
 docker-compose run --rm openapi-generator generate \
   -i workspace/openapi.yml \
   -g dart-dio \
-  -o workspace/dart-client \
+  -o workspace/generated/dart-client \
   --additional-properties=disallowAdditionalPropertiesIfNotPresent=false,pubName=dart-client,pubLibrary=dart-client
 
 # NOTE: 生成されたパッケージの依存パッケージのインストールと`build_runner`のビルドが必要です

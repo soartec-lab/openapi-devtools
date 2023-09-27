@@ -3,8 +3,8 @@
 # Ref: https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/typescript-axios.md
 
 # スキーマの定義が変わったなどで、不要ファイルが残ってしまうのを防ぐため、毎回フォルダをきれいにする
-rm -rf axios-client/gateways && \
-rm -rf axios-client/types && \
+rm -rf generated/axios-client/gateways && \
+rm -rf generated/axios-client/types && \
 
 # OASからTSのコードを自動生成する
 # -i 生成に使用するOAS

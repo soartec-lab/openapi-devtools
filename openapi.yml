@@ -11,3 +11,5 @@ servers:
 paths:
   /users:
     $ref: ./resources/paths/users.yml
+  /users/{uid}:
+    $ref: ./resources/paths/user.yml

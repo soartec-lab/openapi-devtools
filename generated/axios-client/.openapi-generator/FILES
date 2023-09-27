@@ -1,10 +1,10 @@
 .gitignore
 .npmignore
-.openapi-generator-ignore
 api.ts
 base.ts
 common.ts
 configuration.ts
+gateways/user-api.ts
 gateways/users-api.ts
 git_push.sh
 index.ts
@@ -15,8 +15,10 @@ types/forbidden.ts
 types/index.ts
 types/internal-server-error.ts
 types/not-found.ts
+types/ok.ts
 types/unauthorized.ts
 types/unprocessable-entity-error.ts
+types/user-patch-params.ts
 types/user-role.ts
 types/user.ts
 types/users-create-params.ts

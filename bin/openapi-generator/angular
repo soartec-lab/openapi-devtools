@@ -2,10 +2,10 @@
 
 # Ref: https://github.com/OpenAPITools/openapi-generator/tree/master/docs/generatorsopenapi-yaml
 
-rm -rf angular-client
+rm -rf generated/angular-client
 
 docker-compose run --rm openapi-generator generate \
   -i workspace/openapi.yml \
   -g typescript-angular \
-  -o workspace/angular-client \
+  -o workspace/generated/angular-client \
   --additional-properties=enumNameSuffix='',enumPropertyNaming=camelCase,fileNaming=kebab-case,withSeparateModelsAndApi=true

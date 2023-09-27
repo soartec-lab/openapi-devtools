@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 /**
  * API
  * internal_api
@@ -11,9 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { ErrorDetail } from './error-detail';
 
 
-
-export * from './gateways/user-api';
-export * from './gateways/users-api';
+export interface NotFound { 
+    message: string;
+    errorDetails?: Array<ErrorDetail>;
+}
 

@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 /**
  * API
  * internal_api
@@ -13,7 +11,14 @@
  */
 
 
-
-export * from './gateways/user-api';
-export * from './gateways/users-api';
+export interface UserPatchParams { 
+    /**
+     * ユーザー名
+     */
+    name?: string;
+    /**
+     * メールアドレス
+     */
+    email?: string;
+}
 

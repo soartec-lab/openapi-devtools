@@ -1,0 +1,160 @@
+get:
+  tags:
+    - User
+  summary: uidに紐づくユーザーを取得
+  operationId: getUser
+  parameters:
+    - description: 対象ユーザーのuid
+      in: path
+      name: uid
+      required: true
+      schema:
+        type: string
+        example: 0fc59eb5-cd11-44ad-bf03-f6930d768f15
+  responses:
+    '200':
+      description: "OK"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/user.yml#/user'
+    '401':
+      description: "Unauthorized"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/unauthorized'
+    '403':
+      description: "Forbidden"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/forbidden'
+    '404':
+      description: "Not Found"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/not_found'
+    '500':
+      description: "Internal Server Error"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/internal_server_error'
+
+patch:
+  tags:
+    - User
+  summary: ユーザーの更新
+  operationId: patchUser
+  requestBody:
+    description: ユーザー更新のためのパラメータ
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/requests/user_patch_params'
+  parameters:
+    - description: 対象のユーザーのuid
+      in: path
+      name: uid
+      required: true
+      schema:
+        example: 0fc59eb5-cd11-44ad-bf03-f6930d768f15
+        type: string
+  responses:
+    '200':
+      description: "OK"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/ok'
+    '401':
+      description: "Unauthorized"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/unauthorized'
+    '403':
+      description: "Forbidden"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/forbidden'
+    '404':
+      description: "Not Found"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/not_found'
+    '422':
+      description: "Unprocessable Entity Error"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/unprocessable_entity_error'
+    '500':
+      description: "Internal Server Error"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/internal_server_error'
+delete:
+  tags:
+    - User
+  summary: uidに紐づくユーザーを削除する
+  operationId: deleteUser
+  parameters:
+    - description: 対象のユーザーのuid
+      in: path
+      name: uid
+      required: true
+      schema:
+        example: 0fc59eb5-cd11-44ad-bf03-f6930d768f15
+        type: string
+  responses:
+    '200':
+      description: "OK"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/ok'
+    '401':
+      description: "Unauthorized"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/unauthorized'
+    '403':
+      description: "Forbidden"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/forbidden'
+    '404':
+      description: "NotFound"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/not_found'
+    '500':
+      description: "Internal Server Error"
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/errors.yml#/internal_server_error'
+
+components:
+  schemas:
+    requests:
+      user_patch_params:
+        type: object
+        properties:
+          name:
+            type: string
+            description: ユーザー名
+          email:
+            type: string
+            format: email
+            description: メールアドレス
