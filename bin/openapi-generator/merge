@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Ref: https://github.com/OpenAPITools/openapi-generator/tree/master/docs/generatorsopenapi-yaml
+
+rm -rf merged-schema
+
 # pathごとに分割して管理しているOASを結合したファイルを`openapi/generated`に配置する
 # -i 生成に使用するOAS
 # -g generatorの種類
