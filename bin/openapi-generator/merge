@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# pathごとに分割して管理しているOASを結合したファイルを`openapi/generated`に配置する
+# -i 生成に使用するOAS
+# -g generatorの種類
+# -o 生成したファイルの配置場所
+
+docker-compose run --rm openapi-generator generate \
+  -i workspace/openapi.yml \
+  -g openapi-yaml \
+  -o workspace/merged-schema

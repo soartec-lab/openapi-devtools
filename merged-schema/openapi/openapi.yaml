@@ -1,0 +1,312 @@
+openapi: 3.0.0
+info:
+  description: internal_api
+  title: API
+  version: v1
+servers:
+- url: http://localhost:8082/
+paths:
+  /users:
+    get:
+      operationId: getUsers
+      parameters:
+      - description: ページャー
+        in: query
+        name: page
+        required: false
+        schema:
+          example: 10
+          minimum: 1
+          type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/users'
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/not_found'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internal_server_error'
+          description: Internal Server Error
+      summary: ユーザー一覧の取得
+      tags:
+      - Users
+    post:
+      operationId: Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/users_create_params'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/created'
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bad_request'
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unauthorized'
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/forbidden'
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/not_found'
+          description: Not Found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/unprocessable_entity_error'
+          description: Unprocessable Entity
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/internal_server_error'
+          description: Internal Server Error
+      summary: ユーザーの追加
+      tags:
+      - Users
+components:
+  schemas:
+    users:
+      example:
+        totalCount: 10
+        users:
+        - uid: E4ByhpFY9J0gzXh6KTjdsA
+          createdAt: 2001-02-03T04:05:06+09:00
+          role: general
+          name: test
+          email: test@test.com
+          age: 20
+          isCompleted: true
+        - uid: E4ByhpFY9J0gzXh6KTjdsA
+          createdAt: 2001-02-03T04:05:06+09:00
+          role: general
+          name: test
+          email: test@test.com
+          age: 20
+          isCompleted: true
+      properties:
+        users:
+          items:
+            $ref: '#/components/schemas/user'
+          type: array
+        totalCount:
+          description: リソースの合計数
+          example: 10
+          maximum: 100
+          minimum: 0
+          type: integer
+      required:
+      - totalCount
+      - users
+      type: object
+    users_create_params:
+      properties:
+        name:
+          description: 名前
+          example: test
+          type: string
+      required:
+      - name
+    unauthorized:
+      properties:
+        message:
+          example: 登録しました。
+          type: string
+        errorDetails:
+          items:
+            $ref: '#/components/schemas/error_detail'
+          type: array
+      required:
+      - message
+      type: object
+    message:
+      example: 登録しました。
+      type: string
+    error_detail:
+      example:
+        propertyName: name
+        propertyMessage: 入力値が不正です。
+      properties:
+        propertyName:
+          description: エラーになったプロパティ
+          example: name
+          type: string
+        propertyMessage:
+          description: エラーメッセージ
+          example: 入力値が不正です。
+          type: string
+      required:
+      - propertyMessage
+      - propertyName
+      type: object
+    forbidden:
+      properties:
+        message:
+          example: 登録しました。
+          type: string
+        errorDetails:
+          items:
+            $ref: '#/components/schemas/error_detail'
+          type: array
+      required:
+      - message
+      type: object
+    not_found:
+      properties:
+        message:
+          example: Not Found
+          type: string
+        errorDetails:
+          items:
+            $ref: '#/components/schemas/error_detail'
+          type: array
+      required:
+      - message
+      type: object
+    internal_server_error:
+      properties:
+        message:
+          example: 登録しました。
+          type: string
+      required:
+      - message
+      type: object
+    created:
+      example:
+        message: 登録しました。
+        errorDetails:
+        - propertyName: name
+          propertyMessage: 入力値が不正です。
+        - propertyName: name
+          propertyMessage: 入力値が不正です。
+      properties:
+        message:
+          example: 登録しました。
+          type: string
+        errorDetails:
+          items:
+            $ref: '#/components/schemas/error_detail'
+          type: array
+      required:
+      - message
+      type: object
+    bad_request:
+      properties:
+        message:
+          example: 登録しました。
+          type: string
+        errorDetails:
+          items:
+            $ref: '#/components/schemas/error_detail'
+          type: array
+      required:
+      - message
+      type: object
+    unprocessable_entity_error:
+      properties:
+        message:
+          example: 登録しました。
+          type: string
+        errorDetails:
+          items:
+            $ref: '#/components/schemas/error_detail'
+          type: array
+      required:
+      - message
+      type: object
+    user:
+      example:
+        uid: E4ByhpFY9J0gzXh6KTjdsA
+        createdAt: 2001-02-03T04:05:06+09:00
+        role: general
+        name: test
+        email: test@test.com
+        age: 20
+        isCompleted: true
+      properties:
+        uid:
+          description: uid
+          example: E4ByhpFY9J0gzXh6KTjdsA
+          type: string
+        email:
+          description: メールアドレス
+          example: test@test.com
+          format: email
+          type: string
+        name:
+          description: ユーザー名
+          example: test
+          type: string
+        age:
+          description: 年齢
+          example: 20
+          type: integer
+        role:
+          $ref: '#/components/schemas/user_role'
+        isCompleted:
+          description: ユーザー登録完了フラグ
+          example: true
+          type: boolean
+        createdAt:
+          description: 作成日時
+          example: 2001-02-03T04:05:06+09:00
+          format: date-time
+          type: string
+      required:
+      - age
+      - createdAt
+      - email
+      - isCompleted
+      - name
+      - role
+      - uid
+      type: object
+    user_role:
+      description: ユーザーのロール種別
+      enum:
+      - general
+      - admin
+      example: general
+      type: string
