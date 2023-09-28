@@ -13,13 +13,13 @@ services:
     image: swaggerapi/swagger-editor
     ports:
       - "8081:8080"
-  swagger-api:
+  prism:
     image: stoplight/prism:3
     ports:
       - "8082:4010"
     command: mock -h 0.0.0.0 /openapi.yml
     volumes:
-      - ./generated/openapi/openapi.yaml:/openapi.yml
+      - ./generated/merged-schema/openapi/openapi.yaml:/openapi.yml
   openapi-generator:
     image: openapitools/openapi-generator-cli
     volumes:
